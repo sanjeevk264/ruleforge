@@ -1,0 +1,123 @@
+{
+  "policy_id": "CP-RAD-014",
+  "default_decision": "PEND_REVIEW",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Urgent red-flag diagnosis",
+      "source_quote": "MRI of the lumbar spine is approved without further review when the request includes a diagnosis of cauda equina syndrome (G83.4), suspected vertebral metastasis (C79.51), or vertebral osteomyelitis (M46.2).",
+      "priority": 100,
+      "when": {
+        "field": "diagnosis_codes",
+        "op": "includes_any",
+        "value": [
+          "G83.4",
+          "C79.51",
+          "M46.2"
+        ]
+      },
+      "then": {
+        "decision": "APPROVE",
+        "reason_code": "URGENT_INDICATION"
+      }
+    },
+    {
+      "id": "R2",
+      "description": "Pediatric member",
+      "source_quote": "Requests for members under 18 years of age are pended for review by a pediatric radiologist.",
+      "priority": 10,
+      "when": {
+        "field": "member_age",
+        "op": "<",
+        "value": 18
+      },
+      "then": {
+        "decision": "PEND_REVIEW",
+        "reason_code": "PEDIATRIC_RADIOLOGY_REVIEW"
+      }
+    },
+    {
+      "id": "R3",
+      "description": "Repeat MRI within 12 months without new deficit",
+      "source_quote": "A request is denied when the member had a lumbar MRI within the past 12 months, unless the request documents a new neurological deficit.",
+      "priority": 50,
+      "when": {
+        "all": [
+          {
+            "field": "months_since_last_lumbar_mri",
+            "op": "<",
+            "value": 12
+          },
+          {
+            "field": "new_neuro_deficit",
+            "op": "==",
+            "value": false
+          }
+        ]
+      },
+      "then": {
+        "decision": "DENY",
+        "reason_code": "REPEAT_IMAGING_NOT_INDICATED"
+      }
+    },
+    {
+      "id": "R4",
+      "description": "Routine low back pain meets criteria",
+      "source_quote": "For non-urgent low back pain, MRI is approved when the member is 18 or older, has completed at least 6 weeks of conservative therapy, and has had symptoms for at least 6 weeks.",
+      "priority": 10,
+      "when": {
+        "all": [
+          {
+            "field": "member_age",
+            "op": ">=",
+            "value": 18
+          },
+          {
+            "field": "conservative_therapy_weeks",
+            "op": ">=",
+            "value": 6
+          },
+          {
+            "field": "symptom_duration_weeks",
+            "op": ">=",
+            "value": 6
+          }
+        ]
+      },
+      "then": {
+        "decision": "APPROVE",
+        "reason_code": "ROUTINE_CRITERIA_MET"
+      }
+    },
+    {
+      "id": "R5",
+      "description": "Insufficient conservative therapy",
+      "source_quote": "Requests where the member has completed fewer than 6 weeks of conservative therapy are denied.",
+      "priority": 10,
+      "when": {
+        "field": "conservative_therapy_weeks",
+        "op": "<",
+        "value": 6
+      },
+      "then": {
+        "decision": "DENY",
+        "reason_code": "CONSERVATIVE_THERAPY_INSUFFICIENT"
+      }
+    },
+    {
+      "id": "R6",
+      "description": "Out-of-network ordering provider",
+      "source_quote": "Requests from out-of-network ordering providers are pended for network review.",
+      "priority": 10,
+      "when": {
+        "field": "provider_network",
+        "op": "==",
+        "value": "OUT"
+      },
+      "then": {
+        "decision": "PEND_REVIEW",
+        "reason_code": "NETWORK_REVIEW"
+      }
+    }
+  ]
+}

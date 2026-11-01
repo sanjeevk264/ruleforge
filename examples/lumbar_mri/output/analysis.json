@@ -1,0 +1,180 @@
+[
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R1",
+      "R2"
+    ],
+    "detail": "R1 (APPROVE, p=100) overrides R2 (PEND_REVIEW, p=10)",
+    "witness": {
+      "member_age": 0,
+      "diagnosis_codes": [
+        "G83.4"
+      ],
+      "conservative_therapy_weeks": 8,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 240,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    }
+  },
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R1",
+      "R3"
+    ],
+    "detail": "R1 (APPROVE, p=100) overrides R3 (DENY, p=50)",
+    "witness": {
+      "member_age": 45,
+      "diagnosis_codes": [
+        "G83.4"
+      ],
+      "conservative_therapy_weeks": 8,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    }
+  },
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R1",
+      "R5"
+    ],
+    "detail": "R1 (APPROVE, p=100) overrides R5 (DENY, p=10)",
+    "witness": {
+      "member_age": 45,
+      "diagnosis_codes": [
+        "G83.4"
+      ],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 240,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    }
+  },
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R1",
+      "R6"
+    ],
+    "detail": "R1 (APPROVE, p=100) overrides R6 (PEND_REVIEW, p=10)",
+    "witness": {
+      "member_age": 45,
+      "diagnosis_codes": [
+        "G83.4"
+      ],
+      "conservative_therapy_weeks": 8,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 240,
+      "new_neuro_deficit": false,
+      "provider_network": "OUT"
+    }
+  },
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R3",
+      "R2"
+    ],
+    "detail": "R3 (DENY, p=50) overrides R2 (PEND_REVIEW, p=10)",
+    "witness": {
+      "member_age": 0,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 8,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    }
+  },
+  {
+    "kind": "UNRESOLVED_CONFLICT",
+    "rules": [
+      "R2",
+      "R5"
+    ],
+    "detail": "R2 -> PEND_REVIEW and R5 -> DENY both fire at priority 10; outcome depends on rule order",
+    "witness": {
+      "member_age": 0,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 240,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    }
+  },
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R3",
+      "R4"
+    ],
+    "detail": "R3 (DENY, p=50) overrides R4 (APPROVE, p=10)",
+    "witness": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 6,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    }
+  },
+  {
+    "kind": "RESOLVED_BY_PRIORITY",
+    "rules": [
+      "R3",
+      "R6"
+    ],
+    "detail": "R3 (DENY, p=50) overrides R6 (PEND_REVIEW, p=10)",
+    "witness": {
+      "member_age": 45,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 8,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "OUT"
+    }
+  },
+  {
+    "kind": "UNRESOLVED_CONFLICT",
+    "rules": [
+      "R4",
+      "R6"
+    ],
+    "detail": "R4 -> APPROVE and R6 -> PEND_REVIEW both fire at priority 10; outcome depends on rule order",
+    "witness": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 6,
+      "months_since_last_lumbar_mri": 240,
+      "new_neuro_deficit": false,
+      "provider_network": "OUT"
+    }
+  },
+  {
+    "kind": "UNRESOLVED_CONFLICT",
+    "rules": [
+      "R5",
+      "R6"
+    ],
+    "detail": "R5 -> DENY and R6 -> PEND_REVIEW both fire at priority 10; outcome depends on rule order",
+    "witness": {
+      "member_age": 45,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 10,
+      "months_since_last_lumbar_mri": 240,
+      "new_neuro_deficit": false,
+      "provider_network": "OUT"
+    }
+  }
+]

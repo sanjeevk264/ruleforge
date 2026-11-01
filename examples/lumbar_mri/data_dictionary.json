@@ -1,0 +1,11 @@
+{
+  "fields": {
+    "member_age": {"type": "int", "min": 0, "max": 120, "default": 45, "description": "Member age in whole years on the date of request"},
+    "diagnosis_codes": {"type": "code_list", "description": "ICD-10-CM codes submitted on the request"},
+    "conservative_therapy_weeks": {"type": "int", "min": 0, "max": 104, "default": 8, "description": "Weeks of documented conservative therapy (PT, NSAIDs, chiropractic)"},
+    "symptom_duration_weeks": {"type": "int", "min": 0, "max": 520, "default": 10, "description": "Weeks since onset of current symptoms"},
+    "months_since_last_lumbar_mri": {"type": "int", "min": 0, "max": 240, "default": 240, "description": "Months since last lumbar MRI; 240 if none on record"},
+    "new_neuro_deficit": {"type": "bool", "description": "Request documents a new neurological deficit"},
+    "provider_network": {"type": "enum", "values": ["IN", "OUT"], "description": "Network status of the ordering provider"}
+  }
+}

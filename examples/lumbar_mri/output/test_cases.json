@@ -1,0 +1,280 @@
+[
+  {
+    "id": "TC001",
+    "rule_id": "R1",
+    "covers": "diagnosis_codes includes_any ['G83.4', 'C79.51', 'M46.2'] = TRUE",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [
+        "G83.4"
+      ],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "APPROVE",
+    "expected_rule": "R1"
+  },
+  {
+    "id": "TC002",
+    "rule_id": "R1",
+    "covers": "diagnosis_codes includes_any ['G83.4', 'C79.51', 'M46.2'] = FALSE",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "DENY",
+    "expected_rule": "R3"
+  },
+  {
+    "id": "TC003",
+    "rule_id": "R1",
+    "covers": "diagnosis_codes includes C79.51",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [
+        "C79.51"
+      ],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "APPROVE",
+    "expected_rule": "R1"
+  },
+  {
+    "id": "TC004",
+    "rule_id": "R1",
+    "covers": "diagnosis_codes includes M46.2",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [
+        "M46.2"
+      ],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "APPROVE",
+    "expected_rule": "R1"
+  },
+  {
+    "id": "TC005",
+    "rule_id": "R2",
+    "covers": "member_age < 18 = TRUE",
+    "record": {
+      "member_age": 17,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": "R2"
+  },
+  {
+    "id": "TC006",
+    "rule_id": "R2",
+    "covers": "member_age < 18 = FALSE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "DENY",
+    "expected_rule": "R5"
+  },
+  {
+    "id": "TC007",
+    "rule_id": "R3",
+    "covers": "months_since_last_lumbar_mri < 12 = TRUE",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 11,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "DENY",
+    "expected_rule": "R3"
+  },
+  {
+    "id": "TC008",
+    "rule_id": "R3",
+    "covers": "months_since_last_lumbar_mri < 12 = FALSE",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 12,
+      "new_neuro_deficit": false,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": "R2"
+  },
+  {
+    "id": "TC009",
+    "rule_id": "R3",
+    "covers": "new_neuro_deficit == False = FALSE",
+    "record": {
+      "member_age": 0,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 0,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": "R2"
+  },
+  {
+    "id": "TC010",
+    "rule_id": "R4",
+    "covers": "member_age >= 18 = TRUE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 6,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "APPROVE",
+    "expected_rule": "R4"
+  },
+  {
+    "id": "TC011",
+    "rule_id": "R4",
+    "covers": "member_age >= 18 = FALSE",
+    "record": {
+      "member_age": 17,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 6,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": "R2"
+  },
+  {
+    "id": "TC012",
+    "rule_id": "R4",
+    "covers": "conservative_therapy_weeks >= 6 = FALSE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 5,
+      "symptom_duration_weeks": 6,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "DENY",
+    "expected_rule": "R5"
+  },
+  {
+    "id": "TC013",
+    "rule_id": "R4",
+    "covers": "symptom_duration_weeks >= 6 = FALSE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 5,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": null
+  },
+  {
+    "id": "TC014",
+    "rule_id": "R5",
+    "covers": "conservative_therapy_weeks < 6 = TRUE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 5,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": true,
+    "expected_decision": "DENY",
+    "expected_rule": "R5"
+  },
+  {
+    "id": "TC015",
+    "rule_id": "R5",
+    "covers": "conservative_therapy_weeks < 6 = FALSE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "IN"
+    },
+    "rule_fires": false,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": null
+  },
+  {
+    "id": "TC016",
+    "rule_id": "R6",
+    "covers": "provider_network == OUT = TRUE",
+    "record": {
+      "member_age": 18,
+      "diagnosis_codes": [],
+      "conservative_therapy_weeks": 6,
+      "symptom_duration_weeks": 0,
+      "months_since_last_lumbar_mri": 0,
+      "new_neuro_deficit": true,
+      "provider_network": "OUT"
+    },
+    "rule_fires": true,
+    "expected_decision": "PEND_REVIEW",
+    "expected_rule": "R6"
+  }
+]
